@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Results | Career Path Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Your Personality Profile</h1>
+            <p>Based on the Big Five personality assessment</p>
+        </header>
+        
+        <section class="results">
+            <div class="personality-results">
+                <h2>Your Personality Traits</h2>
+                
+                <div class="trait-scores">
+                    <div class="trait-score">
+                        <h3>Openness</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: {{ scores.openness }}%"></div>
+                        </div>
+                        <span class="score-value">{{ scores.openness }}%</span>
+                        <p class="trait-description">{{ profile.openness.description }}</p>
+                    </div>
+                    
+                    <div class="trait-score">
+                        <h3>Conscientiousness</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: {{ scores.conscientiousness }}%"></div>
+                        </div>
+                        <span class="score-value">{{ scores.conscientiousness }}%</span>
+                        <p class="trait-description">{{ profile.conscientiousness.description }}</p>
+                    </div>
+                    
+                    <div class="trait-score">
+                        <h3>Extraversion</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: {{ scores.extraversion }}%"></div>
+                        </div>
+                        <span class="score-value">{{ scores.extraversion }}%</span>
+                        <p class="trait-description">{{ profile.extraversion.description }}</p>
+                    </div>
+                    
+                    <div class="trait-score">
+                        <h3>Agreeableness</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: {{ scores.agreeableness }}%"></div>
+                        </div>
+                        <span class="score-value">{{ scores.agreeableness }}%</span>
+                        <p class="trait-description">{{ profile.agreeableness.description }}</p>
+                    </div>
+                    
+                    <div class="trait-score">
+                        <h3>Neuroticism</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: {{ scores.neuroticism }}%"></div>
+                        </div>
+                        <span class="score-value">{{ scores.neuroticism }}%</span>
+                        <p class="trait-description">{{ profile.neuroticism.description }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="career-recommendations">
+                <h2>Recommended Career Paths</h2>
+                
+                <div class="recommendations-list">
+                    {% for career in recommendations %}
+                    <div class="recommendation-item">
+                        <h3>{{ career }}</h3>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="explanation-box">
+                    <h3>Why These Careers Match Your Personality</h3>
+                    {% for explanation in explanations %}
+                    <p>{{ explanation }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="cta">
+                <a href="{{ url_for('assessment') }}" class="button secondary">Retake Assessment</a>
+                <a href="{{ url_for('index') }}" class="button">Back to Home</a>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Career Path Finder &copy; 2025</p>
+        </footer>
+    </div>
+</body>
+</html>

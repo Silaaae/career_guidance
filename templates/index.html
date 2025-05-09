@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Path Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Career Path Finder</h1>
+            <p>Discover the careers that match your personality</p>
+        </header>
+        
+        <section class="intro">
+            <h2>Find Your Ideal Career Path</h2>
+            <p>Take our personality assessment based on the scientifically validated Big Five personality traits to discover career paths that align with your natural strengths and preferences.</p>
+            
+            <div class="trait-info">
+                <div class="trait">
+                    <h3>Openness</h3>
+                    <p>Your receptiveness to new ideas and experiences</p>
+                </div>
+                <div class="trait">
+                    <h3>Conscientiousness</h3>
+                    <p>Your approach to organization and responsibility</p>
+                </div>
+                <div class="trait">
+                    <h3>Extraversion</h3>
+                    <p>How you engage with the social world around you</p>
+                </div>
+                <div class="trait">
+                    <h3>Agreeableness</h3>
+                    <p>Your approach to cooperation and social harmony</p>
+                </div>
+                <div class="trait">
+                    <h3>Neuroticism</h3>
+                    <p>Your emotional stability and resilience</p>
+                </div>
+            </div>
+            
+            <div class="cta">
+                <a href="{{ url_for('assessment') }}" class="button">Start Assessment</a>
+            </div>
+            
+            <div class="info-box">
+                <h3>About This Test</h3>
+                <p>This assessment contains 50 questions and takes approximately 10-15 minutes to complete. Your answers will be used to generate personalized career recommendations based on your unique personality profile.</p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Career Path Finder &copy; 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
+```
+
+Create `templates/assessment.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Assessment | Career Path Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Personality Assessment</h1>
+            <p>Answer honestly for the most accurate results</p>
+        </header>
+        
+        <section class="assessment">
+            <form action="{{ url_for('submit_assessment') }}" method="post" id="assessmentForm">
+                <div class="instructions">
+                    <p>For each statement, indicate how accurately it describes you on a scale from 1 to 5:</p>
+                    <div class="scale-legend">
+                        <span>1: Strongly Disagree</span>
+                        <span>2: Disagree</span>
+                        <span>3: Neutral</span>
+                        <span>4: Agree</span>
+                        <span>5: Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="questions">
+                    {% for question in questions %}
+                    <div class="question-item" id="{{ question.id }}">
+                        <p class="question-text">{{ question.question }}</p>
+                        <div class="options">
+                            <label>
+                                <input type="radio" name="{{ question.id }}" value="1" required>
+                                <span>1</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="{{ question.id }}" value="2">
+                                <span>2</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="{{ question.id }}" value="3">
+                                <span>3</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="{{ question.id }}" value="4">
+                                <span>4</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="{{ question.id }}" value="5">
+                                <span>5</span>
+                            </label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="button">Submit Answers</button>
+                </div>
+            </form>
+            
+            <div class="progress-indicator">
+                <span id="progressText">0/50 questions answered</span>
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Career Path Finder &copy; 2025</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
