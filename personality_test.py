@@ -97,7 +97,61 @@ class PersonalityTest:
         return scores
 
     def get_personality_profile(self, scores):
-        profile = {}
-        # ... same profile logic ...
-        # For brevity, assume this matches the provided content.
+        profile = {
+            'openness': {
+                'description': self._get_openness_description(scores['openness'])
+            },
+            'conscientiousness': {
+                'description': self._get_conscientiousness_description(scores['conscientiousness'])
+            },
+            'extraversion': {
+                'description': self._get_extraversion_description(scores['extraversion'])
+            },
+            'agreeableness': {
+                'description': self._get_agreeableness_description(scores['agreeableness'])
+            },
+            'neuroticism': {
+                'description': self._get_neuroticism_description(scores['neuroticism'])
+            }
+        }
         return profile
+
+    def _get_openness_description(self, score):
+        if score >= 75:
+            return "You score high in openness to experience. You're curious, imaginative, and open to trying new things. You value creativity, innovation, and intellectual stimulation. You're likely to enjoy art, music, and cultural experiences."
+        elif score >= 50:
+            return "You have a moderate level of openness. You appreciate both new experiences and traditions. You can be creative and practical depending on the situation, making you adaptable to various environments."
+        else:
+            return "You score lower in openness. You're practical, conventional, and prefer familiar routines. You value tradition and consistency, and may approach problems with established solutions rather than experimental ones."
+
+    def _get_conscientiousness_description(self, score):
+        if score >= 75:
+            return "You score high in conscientiousness. You're organized, responsible, and dependable. You prefer planned activities over spontaneity and excel at setting and achieving long-term goals. You're likely to be punctual and detail-oriented."
+        elif score >= 50:
+            return "You have a moderate level of conscientiousness. You can be organized when needed but also allow for flexibility. You balance work and leisure effectively and can adapt to both structured and unstructured environments."
+        else:
+            return "You score lower in conscientiousness. You're flexible, spontaneous, and prefer to keep your options open. You may find rigid schedules restrictive and prefer to approach tasks as they come rather than planning extensively."
+
+    def _get_extraversion_description(self, score):
+        if score >= 75:
+            return "You score high in extraversion. You're outgoing, energetic, and draw energy from social interactions. You enjoy being around people, are comfortable in group settings, and often take the initiative in social situations."
+        elif score >= 50:
+            return "You have a moderate level of extraversion. You enjoy social activities but also value your alone time. You're comfortable in group settings but may also appreciate deeper one-on-one conversations and quiet reflection."
+        else:
+            return "You score lower in extraversion. You're more reserved and may prefer quiet, low-key environments. You value deep connections with a few close friends over large social gatherings and may need time alone to recharge after social events."
+
+    def _get_agreeableness_description(self, score):
+        if score >= 75:
+            return "You score high in agreeableness. You're compassionate, cooperative, and prioritize getting along with others. You tend to trust people and value harmony in relationships. You're likely to be helpful and willing to compromise for the sake of the group."
+        elif score >= 50:
+            return "You have a moderate level of agreeableness. You can be cooperative but also stand up for yourself when necessary. You balance compassion with healthy boundaries and can adapt your approach based on social context."
+        else:
+            return "You score lower in agreeableness. You're straightforward, direct, and may prioritize honesty over tact. You're likely to be competitive and skeptical, which can be valuable for critical thinking and negotiation."
+
+    def _get_neuroticism_description(self, score):
+        if score >= 75:
+            return "You score higher in emotional sensitivity. You experience emotions deeply and may be more responsive to stress. This sensitivity can make you empathetic and attuned to subtle emotional cues in yourself and others."
+        elif score >= 50:
+            return "You have a moderate level of emotional sensitivity. You experience a normal range of emotions but generally maintain emotional balance. You're likely to be resilient while still being aware of your feelings."
+        else:
+            return "You score lower in emotional sensitivity. You're calm, steady, and not easily upset by stressful situations. You bounce back quickly from setbacks and maintain emotional stability even under pressure."
